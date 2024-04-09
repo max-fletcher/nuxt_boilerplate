@@ -1,0 +1,11 @@
+1. Color Palette
+  light: {
+    bg - bg-gray-800
+    text - text-cyan-400
+  }
+  dark: {
+    bg - bg-gray-800
+    text - text-cyan-400
+  }
+
+2. Start implementing dark mode
