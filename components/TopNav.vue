@@ -1,20 +1,20 @@
 <template>
   <div>
-    <header class="p-4 bg-gray-800 text-2xl font-bold text-cyan-400">
+    <header class="p-4 bg-slate-200 dark:bg-gray-800 text-2xl font-bold text-slate-700 dark:text-cyan-400">
       <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-        <div class="flex lg:flex-1">
+        <div class="flex">
           <img width="50" src="/icons/android-chrome-192x192.png" alt="Spearhead Logo" />
           <span class="ms-3 mt-2">
             TopNav
           </span>
         </div>
-        <div class="hidden sm:flex lg:gap-x-12">
+        <div class="hidden sm:flex sm:gap-x-6 lg:gap-x-12">
           <div class="text-sm font-semibold leading-6 mx-1">asdawd</div>
           <div class="text-sm font-semibold leading-6 mx-1">asdawd</div>
           <div class="text-sm font-semibold leading-6 mx-1">asdawd</div>
           <div class="text-sm font-semibold leading-6 mx-1">asdawd</div>
         </div>
-        <div class="flex flex-1 justify-end align-baseline">
+        <div class="flex justify-end align-baseline">
           <button @click="isDark = !isDark" class="mb-1">
             <Icon v-if="isDark" size="32" name="jam:sun" />
             <Icon v-else size="32" name="jam:moon" />

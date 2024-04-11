@@ -1,7 +1,7 @@
 1. Color Palette
   light: {
-    bg - bg-gray-800
-    text - text-cyan-400
+    bg - bg-slate-200
+    text - text-slate-700
   }
   dark: {
     bg - bg-gray-800
