@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="p-4 bg-slate-200 dark:bg-gray-800 text-2xl font-bold text-slate-700 dark:text-cyan-400">
+    <header class="p-4 bg-slate-200 dark:bg-gray-800 text-2xl font-bold text-slate-800 dark:text-cyan-400">
       <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div class="flex">
           <img width="50" src="/icons/android-chrome-192x192.png" alt="Spearhead Logo" />

@@ -5,11 +5,6 @@
       <Sidebar v-if="isMainSidebarOpen" />
       <!-- <AuthOverlay v-if="isLoginOpen" />
       <EditProfileOverlay v-if="isEditProfileOpen" /> -->
-
-      <div class="w-10 h-10 text-slate-400 dark:text-orange-800">
-        Henlo
-      </div>
-
     </NuxtLayout>
   </div>
 </template>
