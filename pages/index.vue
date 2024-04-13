@@ -14,7 +14,7 @@
     <div class="bg-slate-200 dark:bg-gray-800 text-slate-800 dark:text-cyan-400">
         <!-- Name section -->
         <section class="flex flex-col items-center justify-center px-2 lg:px-8">
-            <div class="flex flex-col items-center justify-center text-center mt-8 mt-sm-0">
+            <div class="flex flex-col items-center justify-center text-center mt-16">
                 <!-- image -->
                 <img class="md:hidden object-cover w-15 h-40 rounded-full mb-5 ring-2 ring-gray-500/50 ring-offset-[10px]"
                     src="https://i.ibb.co/Byd813Q/mateus-campos-felipe-Zxd-JFg-SGQBA-unsplash.jpg" alt="Max Fletcher">
@@ -214,15 +214,175 @@
     </div>
     <!-- End Cards -->
 
+    <!-- Contact Us Form -->
+    <div class="bg-slate-200 dark:bg-gray-800 text-slate-800 dark:text-cyan-400 px-20 md:px-32 lg:px-40 xl:px-48 pt-10">
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl text-center pb-4">Get In Touch</h2>
+      <h5 class="font-light text-1xl sm:text-3xl lg:text-4xl text-center">Do not hesitate to ask for my help regarding anything</h5>
+
+      <form @submit.prevent="saveContactMessage" class="mt-5">
+        <div class="space-y-12">
+          <div class="border-b pb-12">
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+              <div class="sm:col-span-3 lg:col-span-2">
+                <label for="contact_name" class="block text-sm font-medium leading-6 text-zinc-800 dark:text-cyan-400">Name</label>
+                <div class="mt-2">
+                  <!-- @change="v$.contact_name.$touch" -->
+                  <input id="contact_name" name="contact_name" type="text" autocomplete="off"
+                    placeholder="e.g John Doe"
+                    v-model="contactFormData.contact_name"
+                    class="block w-full h-12 rounded-md outline-none px-2 py-1
+                            bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-600 
+                              border-2 border-slate-800 dark:border-slate-500 placeholder:text-gray-400
+                            dark:focus:border-indigo-400
+                              shadow-lg text-2xl sm:text-sm sm:leading-6"
+                    :class="{
+                      'dark:border-red-500 dark:focus:border-red-500': v$.contact_name.$error
+                    }"
+                  >
+                </div>
+
+                <span v-for="error of v$.$errors" :key="error.$uid">
+                  <div v-if="error.$property === 'contact_name'" 
+                        class="text-red-500 mt-1 ml-2"
+                  >
+                    {{ error.$message }}
+                  </div>
+                </span>
+              </div>
+
+              <div class="sm:col-span-3 lg:col-span-2">
+                <label for="email" class="block text-sm font-medium leading-6 text-slate-800 dark:text-cyan-400">Email address</label>
+                <div class="mt-2">
+                  <!-- @change="v$.email.$touch" -->
+                  <input id="email" name="email" type="text" autocomplete="off"
+                    placeholder="e.g. example@email.com"
+                    v-model="contactFormData.email"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
+                          placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    :class="{
+                      'border-red-500 focus:border-red-500': v$.email.$error,
+                      'border-[#42d392] ': !v$.email.$invalid,
+                    }"
+                  >
+                </div>
+              </div>
+
+              <div class="sm:col-span-3 lg:col-span-2">
+                <label for="subject" class="block text-sm font-medium leading-6 text-slate-800 dark:text-cyan-400">Subject</label>
+                <div class="mt-2">
+                  <!-- @change="v$.subject.$touch" -->
+                  <input id="subject" name="subject" type="text" autocomplete="off" 
+                    placeholder="e.g How to get a web app ?"
+                    v-model="contactFormData.subject"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
+                          placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    :class="{
+                      'border-red-500 focus:border-red-500': v$.subject.$error,
+                      'border-[#42d392] ': !v$.subject.$invalid,
+                    }"
+                  >
+                </div>
+              </div>
+
+              <div class="col-span-full">
+                <label for="details" class="block text-sm font-medium leading-6 text-slate-800 dark:text-cyan-400">Details</label>
+                <div class="mt-2">
+                  <!-- @change="v$.details.$touch" -->
+                  <textarea id="details" name="details" rows="3" 
+                    placeholder="e.g Can you tell me how I get a web app up and running ?"
+                    v-model="contactFormData.details"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
+                          placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    :class="{
+                      'border-red-500 focus:border-red-500': v$.details.$error,
+                      'border-[#42d392] ': !v$.details.$invalid,
+                    }"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex items-center justify-center gap-x-6">
+          <button type="submit"
+            class="rounded-md w-20 md:w-32 lg:w-40 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline 
+                    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- End Contact Us Form -->
+
+
+    <p
+      v-for="error of v$.$errors"
+      :key="error.$uid"
+    >
+    <strong>{{ error.$validator }}</strong>
+    <small> on property</small>
+    <strong>{{ error.$property }}</strong>
+    <small> says:</small>
+    <strong>{{ error.$message }}</strong>
+    </p>
+
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+  import { required, helpers, email } from '@vuelidate/validators';
+  import { useVuelidate } from '@vuelidate/core';
+
   definePageMeta({
     // NOTICE THAT THE LAYOUT COMPONENT IS NAMED MainLayout BUT HERE WE ARE CALLING IT main-layout. THIS IS BECAUSE WE CAN'T USE UNDERSCORES AND CAPITALS HERE AND ANY CAMELCASE IS PARSED AS 
     // KEBAB-CASE BY NUXT FOR DEFINE-COMPOSABLES
     layout: 'main-layout',
   })
+
+  const contactFormData = reactive({
+    contact_name: '',
+    email: '',
+    subject: '',
+    details: '',
+  });
+  
+  // computed rules for generals
+  const contactFormRules = computed(() => {
+      return {
+          contact_name: {
+              required: helpers.withMessage('The name field require', required,),
+              $autoDirty: true,
+          },
+          email: {
+              required: helpers.withMessage('The email field is require', required,),
+              email: helpers.withMessage('The email field must contain a valid email', email,),
+              $autoDirty: true,
+          },
+          subject: {
+              required: helpers.withMessage('The subject field is require', required,),
+              $autoDirty: true,
+          },
+          details: {
+              required: helpers.withMessage('The details field is require', required,),
+              $autoDirty: true,
+          },
+      };
+  });
+
+  const v$ = useVuelidate(contactFormRules, contactFormData)
+
+  const saveContactMessage =   () => {
+      v$.value.$validate();
+      // console.log(v$.value.contact_name,'values');
+      console.log(v$.value.$errors,'errors');
+      console.log(v$.value.$error,'error');
+
+      // console.log(v$.value.contact_name.$errors[0].$message, 'contact_name error');
+      // console.log(v$.value.email.$errors[0].$message, 'contact_name error');
+  };
 
   // onMounted(async () => {
   //   try {
