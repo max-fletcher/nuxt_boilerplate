@@ -25,7 +25,7 @@
         </section>
         <!-- /Name Section -->
         <!-- image section -->
-        <section class="flex items-center justify-between px-2 lg:px-8 pt-10 md:pt-20 mb-20">
+        <section class="flex items-center justify-between px-2 lg:px-8 xl:px-20 pt-10 md:pt-20 mb-20">
             <!-- Summary (left) -->
             <div class="flex flex-col w-full md:w-1/3 space-y-12 text-center md:text-left">
                 <div class="flex flex-col px-10 md:px-16">
@@ -56,7 +56,7 @@
                 <div class="px-10 md:px-16">
                     <p class="text-6xl">+3</p>
                     <br />
-                    <h4 class="text-xl font-bold">Years Experience</h4>
+                    <h4 class="text-xl font-bold">Years Of Experience</h4>
                 </div>
                 <div class="px-10 md:px-16">
                     <p class="text-6xl">+12</p>
@@ -158,7 +158,7 @@
                 group-hover:-translate-y-2 group-hover:block group-hover:translate-x-5 group-hover:scale-110"
               >
               <h1 class="font-serif text-2xl font-bold text-white shadow-xl">Security</h1>
-              <h1 class="text-sm font-light text-gray-200 shadow-xl pr-10">Making sure no one can access your data & application but you</h1>
+              <h1 class="text-sm font-light text-gray-200 shadow-xl pr-10">Making sure no one can access your data but you</h1>
             </div>
           </div>
         </div>
@@ -174,7 +174,7 @@
                 group-hover:-translate-y-2 group-hover:block group-hover:translate-x-5 group-hover:scale-110"
               >
               <h1 class="font-serif text-2xl font-bold text-white shadow-xl">Optimization</h1>
-              <h1 class="text-sm font-light text-gray-200 shadow-xl pr-10">Making sure no one can access your data & application but you</h1>
+              <h1 class="text-sm font-light text-gray-200 shadow-xl pr-10">Conserving resource so you are not overcharged</h1>
             </div>
           </div>
         </div>
@@ -189,8 +189,8 @@
             <div class="absolute bottom-0 z-20 m-0 pb-4 ps-4 transition duration-300 ease-in-out 
                 group-hover:-translate-y-2 group-hover:block group-hover:translate-x-5 group-hover:scale-110"
               >
-              <h1 class="font-serif text-2xl font-bold text-white shadow-xl">Optimization</h1>
-              <h1 class="text-sm font-light text-gray-200 shadow-xl pr-10">Making sure no one can access your data & application but you</h1>
+              <h1 class="font-serif text-2xl font-bold text-white shadow-xl">Efficiency</h1>
+              <h1 class="text-sm font-light text-gray-200 shadow-xl pr-10">Timely updates and delivery</h1>
             </div>
           </div>
         </div>
@@ -206,7 +206,7 @@
                 group-hover:-translate-y-1 group-hover:block group-hover:translate-x-3 group-hover:scale-110"
               >
               <h1 class="font-serif text-2xl font-bold text-white shadow-xl">Transparency</h1>
-              <h1 class="text-sm font-light text-gray-200 shadow-xl">A Little Paradise in Portugal</h1>
+              <h1 class="text-sm font-light text-gray-200 shadow-xl">Adhering to code standards to make the application extensible</h1>
             </div>
           </div>
         </div>

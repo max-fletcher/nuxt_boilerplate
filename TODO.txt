@@ -8,4 +8,8 @@
     text - text-cyan-400
   }
 
-2. Start implementing dark mode
+2. Start implementing dark mode(DONE)
+3. Client Testimonials
+4. Services
+5. Contact Form
+6. Footer(should have social links)
