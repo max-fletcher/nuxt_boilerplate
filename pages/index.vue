@@ -223,7 +223,6 @@
         <div class="space-y-12">
           <div class="border-b pb-12">
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-
               <div class="sm:col-span-3 lg:col-span-2">
                 <label for="contact_name" class="block text-sm font-medium leading-6 text-zinc-800 dark:text-cyan-400">Name</label>
                 <div class="mt-2">
@@ -231,17 +230,16 @@
                   <input id="contact_name" name="contact_name" type="text" autocomplete="off"
                     placeholder="e.g John Doe"
                     v-model="contactFormData.contact_name"
+                    :class="{
+                      'dark:border-red-500 dark:focus:border-red-500': v$.contact_name.$error,
+                      'dark:border-slate-500 dark:focus:border-indigo-400': !v$.contact_name.$error,
+                    }"
                     class="block w-full h-12 rounded-md outline-none px-2 py-1
                             bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-600 
-                              border-2 border-slate-800 dark:border-slate-500 placeholder:text-gray-400
-                            dark:focus:border-indigo-400
+                              border-2 border-slate-800  placeholder:text-gray-400
                               shadow-lg text-2xl sm:text-sm sm:leading-6"
-                    :class="{
-                      'dark:border-red-500 dark:focus:border-red-500': v$.contact_name.$error
-                    }"
                   >
                 </div>
-
                 <span v-for="error of v$.$errors" :key="error.$uid">
                   <div v-if="error.$property === 'contact_name'" 
                         class="text-red-500 mt-1 ml-2"
@@ -250,41 +248,56 @@
                   </div>
                 </span>
               </div>
-
               <div class="sm:col-span-3 lg:col-span-2">
-                <label for="email" class="block text-sm font-medium leading-6 text-slate-800 dark:text-cyan-400">Email address</label>
+                <label for="email" class="block text-sm font-medium leading-6 text-zinc-800 dark:text-cyan-400">Email</label>
                 <div class="mt-2">
                   <!-- @change="v$.email.$touch" -->
                   <input id="email" name="email" type="text" autocomplete="off"
-                    placeholder="e.g. example@email.com"
+                    placeholder="e.g John Doe"
                     v-model="contactFormData.email"
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
-                          placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     :class="{
-                      'border-red-500 focus:border-red-500': v$.email.$error,
-                      'border-[#42d392] ': !v$.email.$invalid,
+                      'dark:border-red-500 dark:focus:border-red-500': v$.email.$error,
+                      'dark:border-slate-500 dark:focus:border-indigo-400': !v$.email.$error,
                     }"
+                    class="block w-full h-12 rounded-md outline-none px-2 py-1
+                            bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-600 
+                              border-2 border-slate-800  placeholder:text-gray-400
+                              shadow-lg text-2xl sm:text-sm sm:leading-6"
                   >
                 </div>
+                <span v-for="error of v$.$errors" :key="error.$uid">
+                  <div v-if="error.$property === 'email'" 
+                        class="text-red-500 mt-1 ml-2"
+                  >
+                    {{ error.$message }}
+                  </div>
+                </span>
               </div>
-
               <div class="sm:col-span-3 lg:col-span-2">
-                <label for="subject" class="block text-sm font-medium leading-6 text-slate-800 dark:text-cyan-400">Subject</label>
+                <label for="subject" class="block text-sm font-medium leading-6 text-zinc-800 dark:text-cyan-400">Subject</label>
                 <div class="mt-2">
                   <!-- @change="v$.subject.$touch" -->
-                  <input id="subject" name="subject" type="text" autocomplete="off" 
-                    placeholder="e.g How to get a web app ?"
+                  <input id="subject" name="subject" type="text" autocomplete="off"
+                    placeholder="e.g John Doe"
                     v-model="contactFormData.subject"
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
-                          placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     :class="{
-                      'border-red-500 focus:border-red-500': v$.subject.$error,
-                      'border-[#42d392] ': !v$.subject.$invalid,
+                      'dark:border-red-500 dark:focus:border-red-500': v$.subject.$error,
+                      'dark:border-slate-500 dark:focus:border-indigo-400': !v$.subject.$error,
                     }"
+                    class="block w-full h-12 rounded-md outline-none px-2 py-1
+                            bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-600 
+                              border-2 border-slate-800  placeholder:text-gray-400
+                              shadow-lg text-2xl sm:text-sm sm:leading-6"
                   >
                 </div>
+                <span v-for="error of v$.$errors" :key="error.$uid">
+                  <div v-if="error.$property === 'subject'" 
+                        class="text-red-500 mt-1 ml-2"
+                  >
+                    {{ error.$message }}
+                  </div>
+                </span>
               </div>
-
               <div class="col-span-full">
                 <label for="details" class="block text-sm font-medium leading-6 text-slate-800 dark:text-cyan-400">Details</label>
                 <div class="mt-2">
@@ -292,14 +305,23 @@
                   <textarea id="details" name="details" rows="3" 
                     placeholder="e.g Can you tell me how I get a web app up and running ?"
                     v-model="contactFormData.details"
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
-                          placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     :class="{
-                      'border-red-500 focus:border-red-500': v$.details.$error,
-                      'border-[#42d392] ': !v$.details.$invalid,
+                      'dark:border-red-500 dark:focus:border-red-500': v$.details.$error,
+                      'dark:border-slate-500 dark:focus:border-indigo-400': !v$.details.$error,
                     }"
+                    class="block w-full rounded-md outline-none px-2 py-1
+                        bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-600 
+                          border-2 border-slate-800  placeholder:text-gray-400
+                          shadow-lg text-2xl sm:text-sm sm:leading-6"
                   ></textarea>
                 </div>
+                <span v-for="error of v$.$errors" :key="error.$uid">
+                  <div v-if="error.$property === 'details'" 
+                        class="text-red-500 mt-1 ml-2"
+                  >
+                    {{ error.$message }}
+                  </div>
+                </span>
               </div>
             </div>
           </div>
@@ -380,8 +402,9 @@
       console.log(v$.value.$errors,'errors');
       console.log(v$.value.$error,'error');
 
-      // console.log(v$.value.contact_name.$errors[0].$message, 'contact_name error');
-      // console.log(v$.value.email.$errors[0].$message, 'contact_name error');
+      if(!v$.value.$error){
+        console.log('submit');
+      }
   };
 
   // onMounted(async () => {
