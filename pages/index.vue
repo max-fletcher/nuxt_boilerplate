@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="bg-slate-200 dark:bg-gray-800 text-slate-800 dark:text-cyan-400">
     <!-- Banner -->
     <div class="w-full max-h-[650px] overflow-y-hidden relative">
       <img class="grayscale-[80%]" src="/common_imgs/laptop1.jpg" alt="Main Image" />
@@ -11,21 +11,21 @@
     <!-- End Banner -->
 
     <!-- Intro -->
-    <div class="bg-slate-200 dark:bg-gray-800 text-slate-800 dark:text-cyan-400">
+    <div class="">
         <!-- Name section -->
         <section class="flex flex-col items-center justify-center px-2 lg:px-8">
-            <div class="flex flex-col items-center justify-center text-center mt-16">
+            <div class="flex flex-col items-center justify-center text-center mt-12">
                 <!-- image -->
                 <img class="md:hidden object-cover w-15 h-40 rounded-full mb-5 ring-2 ring-gray-500/50 ring-offset-[10px]"
                     src="https://i.ibb.co/Byd813Q/mateus-campos-felipe-Zxd-JFg-SGQBA-unsplash.jpg" alt="Max Fletcher">
-                <h5 class="font-light text-2xl sm:text-3xl lg:text-4xl">Hello I am</h5>
-                <h1 class="text-5xl sm:text-6xl lg:text-7xl pt-8 sm:pt-0">Max Fletcher</h1>
+                <h5 class="font-light text-2xl sm:text-3xl lg:text-4xl pt-2">Hello I am</h5>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl pt-0 md:pt-4">Max Fletcher</h1>
                 <h2 class="font-light text-4xl sm:text-5xl lg:text-6xl">Software Developer</h2>
             </div>
         </section>
         <!-- /Name Section -->
         <!-- image section -->
-        <section class="flex items-center justify-between px-2 lg:px-8 xl:px-20 pt-10 md:pt-20 mb-20">
+        <section class="flex items-center justify-between px-2 lg:px-8 xl:px-20 2xl:px-32 pt-10 md:pt-20 mb-20">
             <!-- Summary (left) -->
             <div class="flex flex-col w-full md:w-1/3 space-y-12 text-center md:text-left">
                 <div class="flex flex-col px-10 md:px-16">
@@ -73,7 +73,7 @@
         <!-- /image section -->
         <hr class="border-gray-400 mx-44" />
         <!-- Resume -->
-        <section class="px-20 my-10">
+        <section class="my-10 px-8 lg:px-16 xl:px-36">
             <h4 class="mb-4 text-3xl font-bold text-center md:text-left">Experience</h4>
             <div class="grid grid-cols-1 md:grid-cols-6 py-6">
                 <div class="flex flex-col col-span-2 mb-4 md:mb-0">
@@ -120,7 +120,7 @@
         </section>
         <hr class="border-gray-400 mx-44" />
         <!-- Resume -->
-        <section class="px-20 py-10">
+        <section class="my-10 px-8 lg:px-16 xl:px-36">
             <h4 class="mb-4 text-3xl font-bold text-center md:text-left">Education</h4>
             <div class="grid grid-cols-1 md:grid-cols-6 py-6">
                 <div class="flex flex-col col-span-2 mb-4 md:mb-0">
@@ -141,11 +141,11 @@
     <!-- End Intro -->
 
     <!-- Cards -->
-    <div class="bg-slate-200 dark:bg-gray-800 text-slate-800 dark:text-cyan-400">
+    <div class="xl:px-20">
       <h2 class="text-4xl sm:text-5xl lg:text-6xl text-center pb-4">What I Offer</h2>
       <h5 class="font-light text-1xl sm:text-3xl lg:text-4xl text-center">With every application delivered, I ensure</h5>
 
-      <div class="grid grid-cols-2 justify-items-center py-5 md:py-8 px-20 md:px-28 gap-5">
+      <div class="grid grid-cols-2 justify-items-center py-5 md:py-8 px-8 sm:px-12 md:px-24 gap-5">
         <div class="relative group">
           <div class="absolute inset-0 bg-center rounded-xl bg-black"></div>
           <div class="group relative m-0 flex rounded-xl shadow-xl ring-gray-900/5 sm:mx-auto">
@@ -155,10 +155,10 @@
                     class="block h-full w-full scale-100 object-cover object-center opacity-100 transition duration-300 transform animate-fade-in group-hover:scale-110" alt="" />
             </div>
             <div class="absolute bottom-0 z-20 m-0 pb-4 ps-4 transition duration-300 ease-in-out 
-                group-hover:-translate-y-2 group-hover:block group-hover:translate-x-5 group-hover:scale-110"
+                group-hover:block group-hover:translate-x-2 md:group-hover:translate-x-3 group-hover:-translate-y-[0.5rem] md:group-hover:-translate-y-2 group-hover:scale-110"
               >
-              <h1 class="font-serif text-2xl font-bold text-white shadow-xl">Security</h1>
-              <h1 class="text-sm font-light text-gray-200 shadow-xl pr-10">Making sure no one can access your data but you</h1>
+              <h1 class="font-serif text-md md:text-2xl font-bold text-white shadow-xl">Security</h1>
+              <h1 class="text-[10px] sm:text-sm font-light text-gray-200 shadow-xl pr-10">Making sure no one can access your data but you</h1>
             </div>
           </div>
         </div>
@@ -171,10 +171,10 @@
                     class="block h-full w-full scale-100 object-cover object-center opacity-100 transition duration-300 transform animate-fade-in group-hover:scale-110" alt="" />
             </div>
             <div class="absolute bottom-0 z-20 m-0 pb-4 ps-4 transition duration-300 ease-in-out 
-                group-hover:-translate-y-2 group-hover:block group-hover:translate-x-5 group-hover:scale-110"
+                group-hover:block group-hover:translate-x-2 md:group-hover:translate-x-3 group-hover:-translate-y-[0.5rem] md:group-hover:-translate-y-2 group-hover:scale-110"
               >
-              <h1 class="font-serif text-2xl font-bold text-white shadow-xl">Optimization</h1>
-              <h1 class="text-sm font-light text-gray-200 shadow-xl pr-10">Conserving resource so you are not overcharged</h1>
+              <h1 class="font-serif text-md md:text-2xl font-bold text-white shadow-xl">Optimization</h1>
+              <h1 class="text-[10px] sm:text-sm font-light text-gray-200 shadow-xl pr-10">Conserving resource so you are not overcharged</h1>
             </div>
           </div>
         </div>
@@ -187,10 +187,10 @@
                     class="block h-full w-full scale-100 object-cover object-center opacity-100 transition duration-300 transform animate-fade-in group-hover:scale-110" alt="" />
             </div>
             <div class="absolute bottom-0 z-20 m-0 pb-4 ps-4 transition duration-300 ease-in-out 
-                group-hover:-translate-y-2 group-hover:block group-hover:translate-x-5 group-hover:scale-110"
+                group-hover:block group-hover:translate-x-2 md:group-hover:translate-x-3 group-hover:-translate-y-[0.5rem] md:group-hover:-translate-y-2 group-hover:scale-110"
               >
-              <h1 class="font-serif text-2xl font-bold text-white shadow-xl">Efficiency</h1>
-              <h1 class="text-sm font-light text-gray-200 shadow-xl pr-10">Timely updates and delivery</h1>
+              <h1 class="font-serif text-md md:text-2xl font-bold text-white shadow-xl">Efficiency</h1>
+              <h1 class="text-[10px] sm:text-sm font-light text-gray-200 shadow-xl pr-10">Timely updates and delivery</h1>
             </div>
           </div>
         </div>
@@ -203,10 +203,10 @@
                     class="block h-full w-full scale-100 object-cover object-center opacity-100 transition duration-300 transform animate-fade-in group-hover:scale-110" alt="" />
             </div>
             <div class="absolute bottom-0 z-20 m-0 pb-4 ps-4 transition duration-300 ease-in-out 
-                group-hover:-translate-y-1 group-hover:block group-hover:translate-x-3 group-hover:scale-110"
+                group-hover:block group-hover:translate-x-2 md:group-hover:translate-x-3 group-hover:-translate-y-[0.5rem] md:group-hover:-translate-y-2 group-hover:scale-110"
               >
-              <h1 class="font-serif text-2xl font-bold text-white shadow-xl">Transparency</h1>
-              <h1 class="text-sm font-light text-gray-200 shadow-xl">Adhering to code standards to make the application extensible</h1>
+              <h1 class="font-serif text-md md:text-2xl font-bold text-white shadow-xl">Transparency</h1>
+              <h1 class="text-[10px] sm:text-sm font-light text-gray-200 shadow-xl pr-10">Adhering to code standards to make the application extensible</h1>
             </div>
           </div>
         </div>
@@ -215,7 +215,7 @@
     <!-- End Cards -->
 
     <!-- Contact Us Form -->
-    <div class="bg-slate-200 dark:bg-gray-800 text-slate-800 dark:text-cyan-400 px-20 md:px-32 lg:px-40 xl:px-48 pt-10">
+    <div class="px-20 md:px-32 lg:px-40 xl:px-48 pt-10">
       <h2 class="text-4xl sm:text-5xl lg:text-6xl text-center pb-4">Get In Touch</h2>
       <h5 class="font-light text-1xl sm:text-3xl lg:text-4xl text-center">Do not hesitate to ask for my help regarding anything</h5>
 
@@ -338,8 +338,6 @@
       </form>
     </div>
     <!-- End Contact Us Form -->
-
-
     <p
       v-for="error of v$.$errors"
       :key="error.$uid"

@@ -1,15 +1,15 @@
 <template>
   <div>
-    <header class="p-4 bg-slate-200 dark:bg-gray-800 text-2xl font-bold text-slate-800 dark:text-cyan-400">
+    <header class="p-4 text-2xl font-bold bg-slate-200 dark:bg-gray-800 text-slate-800 dark:text-cyan-400">
       <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-        <div class="flex">
+        <NuxtLink class="flex" to="/">
           <img width="50" src="/icons/android-chrome-192x192.png" alt="Spearhead Logo" />
           <span class="ms-3 mt-2">
             TopNav
           </span>
-        </div>
+        </NuxtLink>
         <div class="hidden sm:flex sm:gap-x-6 lg:gap-x-12">
-          <div class="text-sm font-semibold leading-6 mx-1">asdawd</div>
+          <NuxtLink class="text-sm font-semibold leading-6 mx-1" to="/posts">Posts</NuxtLink>
           <div class="text-sm font-semibold leading-6 mx-1">asdawd</div>
           <div class="text-sm font-semibold leading-6 mx-1">asdawd</div>
           <div class="text-sm font-semibold leading-6 mx-1">asdawd</div>

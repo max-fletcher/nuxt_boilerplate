@@ -9,7 +9,6 @@
   }
 
 2. Start implementing dark mode(DONE)
-3. Client Testimonials
-4. Services
-5. Contact Form
-6. Footer(should have social links)
+3. Data fetching(datatable with filter and pagination)
+4. Form CRUDs(with image/file uploads)
+5. 
