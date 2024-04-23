@@ -9,6 +9,15 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxtjs/color-mode',
   ],
+  runtimeConfig:{
+    API_URL: "http://localhost:3500/api/v1/",
+    public:{
+      API_URL: "http://localhost:3500/api/v1/"
+    }
+  },
+  routeRules: {
+    '/api/**': { proxy: { to: "http://localhost:3500/api/v1/**" } }
+  },
   app: {
     head: {
       charset: 'utf-8',

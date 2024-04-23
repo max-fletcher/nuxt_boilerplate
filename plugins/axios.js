@@ -3,8 +3,8 @@ import axios from 'axios'
 export default defineNuxtPlugin((NuxtApp) => {
 
   axios.defaults.withCredentials = true; //THIS IS TO FORCE AXIOS INSTANCES TO MAKE CROSS-SITE ACCESS-CONTROL REQUESTS WITH CREDENTIALS
-  axios.defaults.withXSRFToken = true;
-  axios.defaults.baseURL = 'http://localhost:8000'
+  // axios.defaults.withXSRFToken = true;
+  axios.defaults.baseURL = 'http://localhost:3500/api/v1/'
 
   axios.defaults.headers.common['Accept'] = `application/json`;
   axios.defaults.headers.common['Content-Type'] = `application/json`;
