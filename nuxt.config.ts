@@ -8,15 +8,13 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/google-fonts',
     '@nuxtjs/color-mode',
+    '@vueuse/nuxt',
   ],
   runtimeConfig:{
     API_URL: "http://localhost:3500/api/v1/",
     public:{
       API_URL: "http://localhost:3500/api/v1/"
     }
-  },
-  routeRules: {
-    '/api/**': { proxy: { to: "http://localhost:3500/api/v1/**" } }
   },
   app: {
     head: {

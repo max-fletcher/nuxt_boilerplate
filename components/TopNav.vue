@@ -15,11 +15,11 @@
           <div class="text-sm font-semibold leading-6 mx-1">asdawd</div>
         </div>
         <div class="flex justify-end align-baseline">
-          <button @click="isDark = !isDark" class="mb-1">
+          <button class="mb-1" @click="isDark = !isDark">
             <Icon v-if="isDark" size="32" name="jam:sun" />
             <Icon v-else size="32" name="jam:moon" />
           </button>
-          <button @click="$generalStore.isMainSidebarOpen = true" class="ms-3">
+          <button class="ms-3 hidden md:block" @click="$generalStore.isMainSidebarOpen = true">
             <Icon size="40" name="iconamoon:menu-burger-horizontal" />
           </button>
         </div>

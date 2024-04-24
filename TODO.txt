@@ -9,6 +9,9 @@
   }
 
 2. Start implementing dark mode(DONE)
-3. Data fetching(datatable with filter and pagination)
+3. Data fetching(datatable with filter and pagination)(DONE)
 4. Form CRUDs(with image/file uploads)
-5. 
+5. Authentication
+6. Image Optimization
+7. CSS/JS Component Libraries(Vuetify/ShadCN/PrimeVue Tailwind)
+8. Framer Motion/Animate.css
