@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div v-if="!error">
+    <div v-if="!error" class="max-w-full">
       <div class="flex justify-center">
         <Icon v-if="pending" name="eos-icons:bubble-loading" size="100" />
       </div>
@@ -25,7 +25,8 @@
                 id="user_email"
                 type="email"
                 name="email"
-                class="border-2 peer block w-full appearance-none rounded-full border-cyan-400 px-0 py-[14px] pl-6 text-sm focus:border-cyan-400 focus:outline-none focus:ring-0
+                class="border-2 peer block w-full appearance-none rounded-full pl-6 text-sm
+                        border-slate-800 dark:border-cyan-400 px-0 py-[14px] dark:focus:border-cyan-400 focus:outline-none focus:ring-0
                         bg-slate-200 dark:bg-gray-800 text-slate-800 dark:text-cyan-400"
                 placeholder=" "
                 v-model="search"
@@ -51,26 +52,28 @@
           </div>
         </div>
 
-        <div class="flex justify-center overflow-scroll" v-if="!pending && posts?.response?.data.length > 0">
+        <div class="h-full flex sm:justify-center sm:px-5 pb-1
+                    scrollbar dark:scrollbar-thumb-cyan-400 dark:scrollbar-gray-300 overflow-x-scroll"
+                    v-if="!pending && posts?.response?.data.length > 0">
           <table class="table-auto border-2 border-cyan-400">
             <thead>
               <tr class="p-2">
-                <th class="p-2 border-2 border-cyan-400">Id</th>
-                <th class="p-2 border-2 border-cyan-400">Title</th>
-                <th class="p-2 border-2 border-cyan-400">Text</th>
-                <th class="p-2 border-2 border-cyan-400">Posted By Name</th>
-                <th class="p-2 border-2 border-cyan-400">Posted By Email</th>
-                <th class="p-2 border-2 border-cyan-400">Comments</th>
+                <th class="p-2 border-2 border-slate-800 dark:border-cyan-400">Id</th>
+                <th class="p-2 border-2 border-slate-800 dark:border-cyan-400">Title</th>
+                <th class="p-2 border-2 border-slate-800 dark:border-cyan-400">Text</th>
+                <th class="p-2 border-2 border-slate-800 dark:border-cyan-400">Posted By Name</th>
+                <th class="p-2 border-2 border-slate-800 dark:border-cyan-400">Posted By Email</th>
+                <th class="p-2 border-2 border-slate-800 dark:border-cyan-400">Comments</th>
               </tr>
             </thead>
             <tbody v-if="posts?.response?.data">
               <tr v-for="post in posts.response.data" :key="post.id">
-                <td class="p-2 border-2 border-cyan-400">{{ post.id }}</td>
-                <td class="p-2 border-2 border-cyan-400">{{ post.title }}</td>
-                <td class="p-2 border-2 border-cyan-400">{{ post.text }}</td>
-                <td class="p-2 border-2 border-cyan-400">{{ post.user.name }}</td>
-                <td class="p-2 border-2 border-cyan-400">{{ post.user.email }}</td>
-                <td class="p-2 border-2 border-cyan-400">
+                <td class="p-2 border-2 border-slate-800 dark:border-cyan-400">{{ post.id }}</td>
+                <td class="p-2 border-2 border-slate-800 dark:border-cyan-400">{{ post.title }}</td>
+                <td class="p-2 border-2 border-slate-800 dark:border-cyan-400">{{ post.text }}</td>
+                <td class="p-2 border-2 border-slate-800 dark:border-cyan-400">{{ post.user.name }}</td>
+                <td class="p-2 border-2 border-slate-800 dark:border-cyan-400">{{ post.user.email }}</td>
+                <td class="p-2 border-2 border-slate-800 dark:border-cyan-400">
                   <span v-for="comment in post.comments" :key="comment.id">
                     {{ comment.text }} <br>
                   </span>
@@ -116,13 +119,13 @@
 
   // Notice the arrow funciton as 1st param
   const { data: posts, pending, refresh, error, status } = await useFetch(() => `${runtimeConfig.public.API_URL}posts?currentPage=${currentPage.value}&search=${debouncedSearch.value}&limit=${limit.value}`, {
-                                                                key: `postList-${currentPage.value}`,
-                                                                onResponseError({ request, response, options }) {
-                                                                  // console.log('onResponseError', request, response, options);
-                                                                  errorStatus.value = response._data.response.error
-                                                                  errorMessage.value = response._data.response.message
-                                                                }
-                                                              })
+                                                                    key: `postList-${currentPage.value}`,
+                                                                    onResponseError({ request, response, options }) {
+                                                                      // console.log('onResponseError', request, response, options);
+                                                                      errorStatus.value = response._data.response.error
+                                                                      errorMessage.value = response._data.response.message
+                                                                    }
+                                                                  })
 
   const executeSearch = useDebounceFn(() => {
     debouncedSearch.value = search.value
