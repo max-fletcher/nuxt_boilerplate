@@ -12,44 +12,53 @@
 
 
 
-                <div class="sm:col-span-3 lg:col-span-2">
-                  <div class="relative w-full group">
-                    <!-- <label class="text-xs text-gray-400">Select Category</label> -->
-                    <label class="block text-sm font-medium leading-6 text-zinc-800 dark:text-cyan-400">Select Category</label>
-                    <button class="py-2.5 px-3 w-full md:text-sm text-site bg-transparent border border-dimmed focus:border-brand focus:outline-none focus:ring-0 peer 
-                                    flex items-center justify-between rounded font-semibold"></button>
-                    <div class="absolute z-[99] top-[100%] left-[50%] translate-x-[-50%] rounded-md overflow-hidden shadow-lg min-w-[200px] 
-                                w-max peer-focus:visible peer-focus:opacity-100 opacity-0 invisible duration-200 p-1 
-                                bg-gray-100 dark:bg-gray-800  border border-dimmed text-xs md:text-sm"
-                    >
-                      <div class=" w-full block cursor-pointer hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-800 hover:text-link px-3 py-2 rounded-md">
-                        All (9)
-                      </div>
-                      <div class=" w-full block cursor-pointer hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-800 hover:text-link px-3 py-2 rounded-md">
-                        Full Stack (6)
-                      </div>
-                      <div class=" w-full block cursor-pointer hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-800 hover:text-link px-3 py-2 rounded-md">
-                        Front End (1)
-                      </div>
-                      <div class=" w-full block cursor-pointer hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-800 hover:text-link px-3 py-2 rounded-md">
-                        Freelance (1)
-                      </div>
-                      <div class=" w-full block cursor-pointer hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-800 hover:text-link px-3 py-2 rounded-md">
-                        New Stack
-                        Project (1)
-                      </div>
+              <div class="sm:col-span-3 lg:col-span-2">
+                <div class="relative w-full group">
+                  <!-- <label class="text-xs text-gray-400">Select Category</label> -->
+                  <!-- border-dimmed focus:border-brand -->
+                  <input class="hidden" value="{{ userId }}">
+                  <label class="block text-sm font-medium leading-6 text-zinc-800 dark:text-cyan-400">Select Category</label>
+                  <button @click.prevent 
+                    class="mt-2 py-2.5 px-3 w-full h-12 md:text-sm text-site bg-transparent 
+                      border-2 dark:border-slate-500 dark:focus:border-indigo-400
+                      focus:outline-none focus:ring-0 peer flex items-center justify-between rounded font-semibold"
+                      :class="{
+                        'dark:border-red-500 dark:focus:border-red-500': v$.userId.$error,
+                        'dark:border-slate-500 dark:focus:border-indigo-400': !v$.userId.$error,
+                      }"
+                  >
+                    {{ createPostFormData.userId }}
+                  </button>
+                  <div class="absolute z-[99] top-[100%] left-[0%] translate-x-[0%] rounded-md overflow-hidden shadow-lg 
+                              w-full peer-focus:visible peer-focus:opacity-100 opacity-0 invisible duration-200 p-1 
+                              bg-gray-100 dark:bg-gray-800 border border-dimmed text-xs md:text-sm"
+                  >
+                    <div class=" w-full block cursor-pointer hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-800 hover:text-link px-3 py-2 rounded-md">
+                      All (9)
+                    </div>
+                    <div class=" w-full block cursor-pointer hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-800 hover:text-link px-3 py-2 rounded-md">
+                      Full Stack (6)
+                    </div>
+                    <div class=" w-full block cursor-pointer hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-800 hover:text-link px-3 py-2 rounded-md">
+                      Front End (1)
+                    </div>
+                    <div class=" w-full block cursor-pointer hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-800 hover:text-link px-3 py-2 rounded-md">
+                      Freelance (1)
+                    </div>
+                    <div class=" w-full block cursor-pointer hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-800 hover:text-link px-3 py-2 rounded-md">
+                      New Stack
+                      Project (1)
                     </div>
                   </div>
                 </div>
-
+              </div>
 
               <div class="sm:col-span-3 lg:col-span-2">
                 <label for="title" class="block text-sm font-medium leading-6 text-zinc-800 dark:text-cyan-400">Title</label>
                 <div class="mt-2">
-                  <!-- @change="v$.title.$touch" -->
                   <input id="title" name="title" type="text" autocomplete="off"
                     placeholder="e.g John Doe"
-                    v-model="contactFormData.title"
+                    v-model="createPostFormData.title"
                     @blur="v$.title.$touch"
                     :class="{
                       'dark:border-red-500 dark:focus:border-red-500': v$.title.$error,
@@ -75,7 +84,7 @@
                   <!-- @change="v$.text.$touch" -->
                   <textarea id="text" name="text" rows="3" 
                     placeholder="e.g Can you tell me how I get a web app up and running ?"
-                    v-model="contactFormData.text"
+                    v-model="createPostFormData.text"
                     @blur="v$.text.$touch"
                     :class="{
                       'dark:border-red-500 dark:focus:border-red-500': v$.text.$error,
@@ -138,9 +147,7 @@
   // Notice the arrow funciton as 1st param
   const { data: users, pending, refresh, error, status } = await useFetch(() => `${runtimeConfig.public.API_URL}users?currentPage=${currentPage.value}&search=${search.value}&limit=${limit.value}`, {
                                                                   onResponse({ request, response, options }) {
-                                                                    // console.log('onResponseError', request, response, options);
-                                                                    errorStatus.value = response._data.response.error
-                                                                    errorMessage.value = response._data.response.message
+                                                                    console.log('onResponseError', request, response, options);
                                                                   },
                                                                   onResponseError({ request, response, options }) {
                                                                     // console.log('onResponseError', request, response, options);
@@ -151,10 +158,9 @@
 
   // userId.value = users
 
-  const contactFormData = reactive({
+  const createPostFormData = reactive({
+    userId: 'Select User',
     title: '',
-    email: '',
-    subject: '',
     text: '',
   });
   
@@ -165,23 +171,18 @@
               required: helpers.withMessage('The name field is require', required,),
               $autoDirty: true,
           },
-          email: {
-              required: helpers.withMessage('The email field is require', required,),
-              email: helpers.withMessage('The email field must contain a valid email', email,),
-              $autoDirty: true,
-          },
-          subject: {
-              required: helpers.withMessage('The subject field is require', required,),
-              $autoDirty: true,
-          },
           text: {
               required: helpers.withMessage('The text field is require', required,),
+              $autoDirty: true,
+          },
+          userId: {
+              required: helpers.withMessage('The user id field is require', required,),
               $autoDirty: true,
           },
       };
   });
 
-  const v$ = useVuelidate(contactFormRules, contactFormData)
+  const v$ = useVuelidate(contactFormRules, createPostFormData)
 
   const createPost =   () => {
       v$.value.$validate();
