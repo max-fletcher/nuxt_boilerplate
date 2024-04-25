@@ -10,7 +10,7 @@
         </NuxtLink>
         <div class="hidden sm:flex sm:gap-x-6 lg:gap-x-12">
           <NuxtLink class="text-sm font-semibold leading-6 mx-1" to="/posts">Posts</NuxtLink>
-          <div class="text-sm font-semibold leading-6 mx-1">asdawd</div>
+          <NuxtLink class="text-sm font-semibold leading-6 mx-1" to="/posts/create">Create Post</NuxtLink>
           <div class="text-sm font-semibold leading-6 mx-1">asdawd</div>
           <div class="text-sm font-semibold leading-6 mx-1">asdawd</div>
         </div>

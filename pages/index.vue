@@ -230,12 +230,13 @@
                   <input id="contact_name" name="contact_name" type="text" autocomplete="off"
                     placeholder="e.g John Doe"
                     v-model="contactFormData.contact_name"
+                    @blur="v$.contact_name.$touch"
                     :class="{
                       'dark:border-red-500 dark:focus:border-red-500': v$.contact_name.$error,
                       'dark:border-slate-500 dark:focus:border-indigo-400': !v$.contact_name.$error,
                     }"
                     class="block w-full h-12 rounded-md outline-none px-2 py-1
-                            bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-600 
+                            bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-400 
                               border-2 border-slate-800  placeholder:text-gray-400
                               shadow-lg text-2xl sm:text-sm sm:leading-6"
                   >
@@ -255,12 +256,13 @@
                   <input id="email" name="email" type="text" autocomplete="off"
                     placeholder="e.g John Doe"
                     v-model="contactFormData.email"
+                    @blur="v$.email.$touch"
                     :class="{
                       'dark:border-red-500 dark:focus:border-red-500': v$.email.$error,
                       'dark:border-slate-500 dark:focus:border-indigo-400': !v$.email.$error,
                     }"
                     class="block w-full h-12 rounded-md outline-none px-2 py-1
-                            bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-600 
+                            bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-400 
                               border-2 border-slate-800  placeholder:text-gray-400
                               shadow-lg text-2xl sm:text-sm sm:leading-6"
                   >
@@ -280,12 +282,13 @@
                   <input id="subject" name="subject" type="text" autocomplete="off"
                     placeholder="e.g John Doe"
                     v-model="contactFormData.subject"
+                    @blur="v$.subject.$touch"
                     :class="{
                       'dark:border-red-500 dark:focus:border-red-500': v$.subject.$error,
                       'dark:border-slate-500 dark:focus:border-indigo-400': !v$.subject.$error,
                     }"
                     class="block w-full h-12 rounded-md outline-none px-2 py-1
-                            bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-600 
+                            bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-400 
                               border-2 border-slate-800  placeholder:text-gray-400
                               shadow-lg text-2xl sm:text-sm sm:leading-6"
                   >
@@ -305,12 +308,13 @@
                   <textarea id="details" name="details" rows="3" 
                     placeholder="e.g Can you tell me how I get a web app up and running ?"
                     v-model="contactFormData.details"
+                    @blur="v$.details.$touch"
                     :class="{
                       'dark:border-red-500 dark:focus:border-red-500': v$.details.$error,
                       'dark:border-slate-500 dark:focus:border-indigo-400': !v$.details.$error,
                     }"
                     class="block w-full rounded-md outline-none px-2 py-1
-                        bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-600 
+                        bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-400 
                           border-2 border-slate-800  placeholder:text-gray-400
                           shadow-lg text-2xl sm:text-sm sm:leading-6"
                   ></textarea>
@@ -373,7 +377,7 @@
   const contactFormRules = computed(() => {
       return {
           contact_name: {
-              required: helpers.withMessage('The name field require', required,),
+              required: helpers.withMessage('The name field is require', required,),
               $autoDirty: true,
           },
           email: {
