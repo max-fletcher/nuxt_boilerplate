@@ -13,7 +13,7 @@
               <!-- Cheap-ass select component. Should prolly overhaul to select instead of div with options later if possible. -->
               <div class="sm:col-span-3 lg:col-span-2">
                 <div class="relative w-full group">
-                  <input class="hidden" value="{{ createPostFormData.userId }}">
+                  <input class="hidden" value="{{ createPostFormData.user_id }}">
                   <label class="block text-sm font-medium leading-6 text-zinc-800 dark:text-cyan-400"
                   >
                     Select User
@@ -21,15 +21,15 @@
                   <button @click.prevent="dropdownOpened = true"
                     v-on-click-outside="validateUserId"
                     :class="{
-                      'text-gray-400' : createPostFormData.userId === '',
-                      'dark:border-red-500 dark:focus:border-red-500': v$.userId.$error,
-                      'dark:border-slate-500 dark:focus:border-indigo-400': !v$.userId.$error,
+                      'text-gray-400' : createPostFormData.user_id === '',
+                      'dark:border-red-500 dark:focus:border-red-500': v$.user_id.$error,
+                      'dark:border-slate-500 dark:focus:border-indigo-400': !v$.user_id.$error,
                     }"
                     class="mt-2 py-2.5 px-3 w-full h-12 md:text-sm text-site bg-transparent
                       border-2 border-slate-500 dark:focus:border-indigo-400
                       focus:outline-none focus:ring-0 peer flex items-center justify-between rounded font-semibold"
                   >
-                    {{ createPostFormData.userId === "" ? "Select user" : createPostFormData.userId }}
+                    {{ createPostFormData.user_id === "" ? "Select user" : userName }}
                   </button>
                   <div class="absolute z-[99] top-[100%] left-[0%] translate-x-[0%] rounded-md overflow-hidden shadow-lg 
                               w-full peer-focus:visible peer-focus:opacity-100 opacity-0 invisible duration-200 p-1 
@@ -42,7 +42,7 @@
                     </div>
                   </div>
                 </div>
-                <span v-for="error of v$.userId.$errors" :key="error.$uid">
+                <span v-for="error of v$.user_id.$errors" :key="error.$uid">
                   <div class="text-red-500 mt-1 ml-2">
                     {{ error.$message }}
                   </div>
@@ -74,9 +74,8 @@
               </div>
 
               <div class="col-span-full">
-                <label for="text" class="block text-sm font-medium leading-6 text-slate-800 dark:text-cyan-400">text</label>
+                <label for="text" class="block text-sm font-medium leading-6 text-slate-800 dark:text-cyan-400">Text</label>
                 <div class="mt-2">
-                  <!-- @change="v$.text.$touch" -->
                   <textarea id="text" name="text" rows="3" 
                     placeholder="e.g Can you tell me how I get a web app up and running ?"
                     v-model="createPostFormData.text"
@@ -117,7 +116,7 @@
       <br />
       {{ createPostFormData }}
       <br />
-      {{ createPostFormData.userId }}
+      {{ createPostFormData.user_id }}
       <br />
       {{ dropdownOpened }}
     </h1>
@@ -126,9 +125,12 @@
 </template>
 
 <script setup>
-  import { required, helpers, email } from '@vuelidate/validators';
+  import { required, helpers } from '@vuelidate/validators';
   import { useVuelidate } from '@vuelidate/core';
   import { vOnClickOutside } from '@vueuse/components'
+  import Toast from 'primevue/toast';
+  import axios from '../../plugins/axios';
+  const $axios = axios().provide.axios //GETTING THE AXIOS INSTANCE PROVIDED BY PROVIDER. SEE THAT FILE.
 
   definePageMeta({
     // NOTICE THAT THE LAYOUT COMPONENT IS NAMED MainLayout BUT HERE WE ARE CALLING IT main-layout. THIS IS BECAUSE WE CAN'T USE UNDERSCORES AND CAPITALS HERE AND ANY CAMELCASE IS PARSED AS 
@@ -157,7 +159,7 @@
                                                               )
 
   const createPostFormData = reactive({
-    userId: '',
+    user_id: '',
     title: '',
     text: '',
   });
@@ -173,7 +175,7 @@
               required: helpers.withMessage('The text field is require', required,),
               $autoDirty: true,
           },
-          userId: {
+          user_id: {
               required: helpers.withMessage('The user id field is require', required,),
               $autoDirty: true,
           },
@@ -182,25 +184,43 @@
 
   const v$ = useVuelidate(contactFormRules, createPostFormData)
 
-  const createPost = () => {
+  const createPost = async () => {
       v$.value.$validate();
       // console.log(v$.value.title,'values');
       console.log(v$.value.$errors,'errors');
       console.log(v$.value.$error,'error');
 
-      if(!v$.value.$error){
-        console.log('submit');
+      console.log('submit');
+
+      if(v$.value.$error){
+        return 0
+      }
+
+      try {
+        console.log(createPostFormData);
+        const res = await $axios.post(`${runtimeConfig.public.API_URL}posts`, createPostFormData)
+        console.log(res);
+      } catch (error) {
+          console.log(error)
+      }
+
+      createPostFormData.value = {
+        user_id: '',
+        title: '',
+        text: '',
       }
   };
 
   const selectUser = (id, name) => {
-    createPostFormData.userId = id
+    userName.value = name
+    createPostFormData.user_id = id
   }
 
   const dropdownOpened = ref(false)
+  const userName = ref('')
   const validateUserId = () => {
     if(dropdownOpened.value){
-      v$.value.userId.$validate()
+      v$.value.user_id.$validate()
     }
   }
 
