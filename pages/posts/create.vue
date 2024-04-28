@@ -196,17 +196,18 @@
       }
 
       try {
-        console.log(createPostFormData);
         const res = await $axios.post(`${runtimeConfig.public.API_URL}posts`, createPostFormData)
         console.log(res);
+
+        createPostFormData.user_id = ''
+        createPostFormData.title = ''
+        createPostFormData.text = ''
+
+        // to clear errors on resetting fields
+        v$.value.$reset()
+
       } catch (error) {
           console.log(error)
-      }
-
-      createPostFormData.value = {
-        user_id: '',
-        title: '',
-        text: '',
       }
   };
 
