@@ -8,7 +8,16 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxtjs/color-mode',
     '@vueuse/nuxt',
+    "shadcn-nuxt"
   ],
+  shadcn: {
+    prefix: '',
+    /**
+     * Directory that the component lives in.
+     * @default "./components/ui"
+     */
+    componentDir: './components/ui'
+  },
   runtimeConfig:{
     API_URL: "http://localhost:3500/api/v1/",
     public:{

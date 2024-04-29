@@ -82,6 +82,9 @@
             </tbody>
           </table>
         </div>
+        <div v-else>
+          <h1>Loading...</h1>
+        </div>
         <div class="flex justify-center pt-8">
           <div class="grid grid-cols-2 gap-8">
             <!-- v-if="posts.response.previous" -->
@@ -91,6 +94,33 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div>
+      <h1>
+        ShadCN Components
+      </h1>
+
+      <!-- Simple Button -->
+      <Button variant="destructive">Click me</Button>
+
+      <Button disabled>
+        <Icon class="w-4 h-4 mr-2 animate-spin" name="mdi:bottle-coke" />
+        Please wait
+      </Button>
+
+      <Toaster />
+
+      <Button
+          @click="() => {
+            toast({
+              title: 'Scheduled: Catch up',
+              description: 'Friday, February 10, 2023 at 5:57 PM',
+            });
+          }"
+      >
+        Add to calendar
+      </Button>
     </div>
 
     <!-- <button class="px-3 py-1 border-2 border-cyan-400" @click="refresh">Refresh</button> -->
@@ -108,6 +138,12 @@
   })
 
   const runtimeConfig = useRuntimeConfig() 
+
+  // Initialize ShadCN toaster
+  import { useToast } from '@/components/ui/toast/use-toast'
+  import { Toaster } from "@/components/ui/toast"
+  const { toast } = useToast()
+  // End Initialize ShadCN toaster
 
   const currentPage = ref(1)
   const limit = ref(10)
