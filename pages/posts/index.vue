@@ -101,14 +101,15 @@
         ShadCN Components
       </h1>
 
-      <!-- Simple Button -->
+      <h1>Buttons</h1>
       <Button variant="destructive">Click me</Button>
 
       <Button disabled>
         <Icon class="w-4 h-4 mr-2 animate-spin" name="mdi:bottle-coke" />
-        Please wait
+        Toast
       </Button>
 
+      <h1>Toast</h1>
       <Toaster />
 
       <Button
@@ -121,6 +122,20 @@
       >
         Add to calendar
       </Button>
+
+      <br />
+
+      <h1>Tooltip</h1>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <Button>Tooltip</Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Add to library</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </div>
 
     <!-- <button class="px-3 py-1 border-2 border-cyan-400" @click="refresh">Refresh</button> -->
@@ -144,6 +159,15 @@
   import { Toaster } from "@/components/ui/toast"
   const { toast } = useToast()
   // End Initialize ShadCN toaster
+
+  // Initialize ShadCN Tooltip
+  import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger
+  } from '@/components/ui/tooltip'
+  // End Initialize ShadCN Tooltip
 
   const currentPage = ref(1)
   const limit = ref(10)
