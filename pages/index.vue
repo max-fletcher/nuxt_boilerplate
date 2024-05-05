@@ -219,7 +219,7 @@
       <h2 class="text-4xl sm:text-5xl lg:text-6xl text-center pb-4">Get In Touch</h2>
       <h5 class="font-light text-1xl sm:text-3xl lg:text-4xl text-center">Do not hesitate to ask for my help regarding anything</h5>
 
-      <form @submit.prevent="saveContactMessage" class="mt-5">
+      <form @submit.prevent="saveContactFormSubmit" class="mt-5">
         <div class="space-y-12">
           <div class="border-b pb-12">
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -241,13 +241,16 @@
                               shadow-lg text-2xl sm:text-sm sm:leading-6"
                   >
                 </div>
-                <span v-for="error of v$.$errors" :key="error.$uid">
+                <!-- <span v-for="error of v$.$errors" :key="error.$uid">
                   <div v-if="error.$property === 'contact_name'" 
                         class="text-red-500 mt-1 ml-2"
                   >
                     {{ error.$message }}
                   </div>
-                </span>
+                </span> -->
+                <div v-if="v$.$errors[0]?.$message" class="text-red-500 mt-1 ml-2">
+                    {{ v$.$errors[0]?.$message }}
+                </div>
               </div>
               <div class="sm:col-span-3 lg:col-span-2">
                 <label for="email" class="block text-sm font-medium leading-6 text-zinc-800 dark:text-cyan-400">Email</label>
@@ -267,13 +270,16 @@
                               shadow-lg text-2xl sm:text-sm sm:leading-6"
                   >
                 </div>
-                <span v-for="error of v$.$errors" :key="error.$uid">
+                <!-- <span v-for="error of v$.$errors" :key="error.$uid">
                   <div v-if="error.$property === 'email'" 
                         class="text-red-500 mt-1 ml-2"
                   >
                     {{ error.$message }}
                   </div>
-                </span>
+                </span> -->
+                <div v-if="v$.$errors[1]?.$message" class="text-red-500 mt-1 ml-2">
+                    {{ v$.$errors[1]?.$message }}
+                </div>
               </div>
               <div class="sm:col-span-3 lg:col-span-2">
                 <label for="subject" class="block text-sm font-medium leading-6 text-zinc-800 dark:text-cyan-400">Subject</label>
@@ -293,13 +299,16 @@
                               shadow-lg text-2xl sm:text-sm sm:leading-6"
                   >
                 </div>
-                <span v-for="error of v$.$errors" :key="error.$uid">
+                <!-- <span v-for="error of v$.$errors" :key="error.$uid">
                   <div v-if="error.$property === 'subject'" 
                         class="text-red-500 mt-1 ml-2"
                   >
                     {{ error.$message }}
                   </div>
-                </span>
+                </span> -->
+                <div v-if="v$.$errors[2]?.$message" class="text-red-500 mt-1 ml-2">
+                    {{ v$.$errors[2]?.$message }}
+                </div>
               </div>
               <div class="col-span-full">
                 <label for="details" class="block text-sm font-medium leading-6 text-slate-800 dark:text-cyan-400">Details</label>
@@ -319,13 +328,16 @@
                           shadow-lg text-2xl sm:text-sm sm:leading-6"
                   ></textarea>
                 </div>
-                <span v-for="error of v$.$errors" :key="error.$uid">
+                <!-- <span v-for="error of v$.$errors" :key="error.$uid">
                   <div v-if="error.$property === 'details'" 
                         class="text-red-500 mt-1 ml-2"
                   >
                     {{ error.$message }}
                   </div>
-                </span>
+                </span> -->
+                <div v-if="v$.$errors[3]?.$message" class="text-red-500 mt-1 ml-2">
+                    {{ v$.$errors[3]?.$message }}
+                </div>
               </div>
             </div>
           </div>
@@ -398,7 +410,7 @@
 
   const v$ = useVuelidate(contactFormRules, contactFormData)
 
-  const saveContactMessage =   () => {
+  const saveContactFormSubmit = () => {
       v$.value.$validate();
       // console.log(v$.value.contact_name,'values');
       console.log(v$.value.$errors,'errors');

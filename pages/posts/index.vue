@@ -178,10 +178,40 @@
       </Dialog>
 
       <h1>Experimenting with custom input</h1>
-        <CustomInput v-model="customInput" class="w-40"/>
+        <CustomInput v-model="customInput" 
+          class="w-40"
+          :class="{
+            'dark:border-red-500 dark:focus:border-red-500': v$.customInput.$error,
+            'dark:border-slate-500 dark:focus:border-indigo-400': !v$.customInput.$error,
+          }"
+          :errorMessage="v$.$errors[0]?.$message"
+        />
         <div>
           {{ customInput }}
         </div>
+
+        <CustomInput v-model="customInput2" 
+          class="w-40"
+          :class="{
+            'dark:border-red-500 dark:focus:border-red-500': v$.customInput2.$error,
+            'dark:border-slate-500 dark:focus:border-indigo-400': !v$.customInput2.$error,
+          }"
+          :errorMessage="v$.$errors[1]?.$message"
+        />
+
+        <Button @click="submit">
+            Save changes
+        </Button>
+
+        <p>{{ v$.$errors[0]?.$message }}</p>
+        <p>{{ v$.$errors[1]?.$message }}</p>
+        <p v-for="error of v$.$errors" :key="error.$uid">
+          <strong>{{ error.$validator }}</strong>
+          <small> on property</small>
+          <strong>{{ error.$property }}</strong>
+          <small> says:</small>
+          <strong>{{ error.$message }}</strong>
+        </p>
     </div>
     <!-- <button class="px-3 py-1 border-2 border-cyan-400" @click="refresh">Refresh</button> -->
     <!-- {{ posts.response }} -->
@@ -216,21 +246,59 @@
 
   // Initialize ShadCN Dialog/Modal
   import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-// End Initialize ShadCN Dialog/Modal
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+  } from '@/components/ui/dialog'
+  // End Initialize ShadCN Dialog/Modal
 
-// Initialize ShadCN Input & Label
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-// End Initialize ShadCN Input & Label
+  // Initialize ShadCN Input & Label
+  import { Input } from '@/components/ui/input'
+  import { Label } from '@/components/ui/label'
+  // End Initialize ShadCN Input & Label
+
+  // For trying out custom component written over shadCN
+  import { required, helpers, email } from '@vuelidate/validators';
+  import { useVuelidate } from '@vuelidate/core';
   const customInput = ref('')
+  const customInput2 = ref('')
+    // computed rules for generals
+    const customInputRules = computed(() => {
+      return {
+          customInput: {
+              required: helpers.withMessage('The customInput1 field is require', required,),
+              $autoDirty: true,
+          },
+          customInput2: {
+              email: helpers.withMessage('The customInput2 field must contain a valid email', email,),
+              required: helpers.withMessage('The customInput2 field is require', required,),
+              $autoDirty: true,
+          },
+          // email: {
+          //     required: helpers.withMessage('The email field is require', required,),
+          //     email: helpers.withMessage('The email field must contain a valid email', email,),
+          //     $autoDirty: true,
+          // },
+      };
+  });
+
+  const v$ = useVuelidate(customInputRules, { customInput })
+
+  const submit = () => {
+      v$.value.$validate();
+      console.log(v$.value.customInput,'values');
+      console.log(v$.value.$errors,'errors');
+      console.log(v$.value.$error,'error');
+
+      if(!v$.value.$error){
+        console.log('submit');
+      }
+  };
+  // End For trying out custom component written over shadCN
 
   const currentPage = ref(1)
   const limit = ref(10)
