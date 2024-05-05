@@ -237,7 +237,7 @@
                     }"
                     class="block w-full h-12 rounded-md outline-none px-2 py-1
                             bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-400 
-                              border-2 border-slate-800  placeholder:text-gray-400
+                              border-2 border-slate-800 placeholder:text-gray-400
                               shadow-lg text-2xl sm:text-sm sm:leading-6"
                   >
                 </div>

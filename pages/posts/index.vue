@@ -88,9 +88,9 @@
         <div class="flex justify-center pt-8">
           <div class="grid grid-cols-2 gap-8">
             <!-- v-if="posts.response.previous" -->
-            <button class="px-3 py-1 border-2 border-cyan-400" :class="{ invisible: !posts.response.previous }" @click="previousPage()">Previous</button>
+            <button class="px-3 py-1 border-2 border-slate-800 dark:border-cyan-400" :class="{ invisible: !posts.response.previous }" @click="previousPage()">Previous</button>
             <!-- v-if="posts.response.next" -->
-            <button class="px-3 py-1 border-2 border-cyan-400" :class="{ invisible: !posts.response.next }" @click="nextPage()">Next</button>
+            <button class="px-3 py-1 border-2 border-slate-800 dark:border-cyan-400" :class="{ invisible: !posts.response.next }" @click="nextPage()">Next</button>
           </div>
         </div>
       </div>
@@ -111,10 +111,12 @@
 
       <h1>Toast</h1>
       <Toaster />
-
+      <!-- Button with custom variant(see button/index.ts to see all variants and make one if need be) -->
       <Button
+          variant="custom"
           @click="() => {
             toast({
+              variant: 'custom',
               title: 'Scheduled: Catch up',
               description: 'Friday, February 10, 2023 at 5:57 PM',
             });
@@ -126,18 +128,61 @@
       <br />
 
       <h1>Tooltip</h1>
-      <TooltipProvider>
+      <!-- Control how fast the tooltip will appear -->
+      <TooltipProvider :delay-duration="100" :skip-delay-duration="100">
         <Tooltip>
           <TooltipTrigger>
-            <Button>Tooltip</Button>
+            <!-- Button with custom variant(see button/index.ts to see all variants and make one if need be) -->
+            <Button variant="custom">Tooltip</Button>
           </TooltipTrigger>
           <TooltipContent>
             <p>Add to library</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
-    </div>
 
+      <h1>Dialog/Modal</h1>
+      <Dialog>
+        <DialogTrigger as-child>
+          <Button variant="outline">
+            Edit Profile
+          </Button>
+        </DialogTrigger>
+        <DialogContent class="sm:max-w-[425px] bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-400">
+          <DialogHeader>
+            <DialogTitle class="bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-400">Edit profile</DialogTitle>
+            <DialogDescription class="bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-400">
+              Make changes to your profile here. Click save when you're done.
+            </DialogDescription>
+          </DialogHeader>
+          <div class="grid gap-4 py-4">
+            <div class="grid grid-cols-4 items-center gap-4">
+              <Label for="name" class="bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-400 text-right">
+                Name
+              </Label>
+              <Input id="name" class="col-span-3" />
+            </div>
+            <div class="grid grid-cols-4 items-center gap-4">
+              <Label for="username" class="bg-white dark:bg-slate-800 text-gray-900 dark:text-cyan-400 text-right">
+                Username
+              </Label>
+              <Input id="username" class="col-span-3" />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button>
+              Save changes
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <h1>Experimenting with custom input</h1>
+        <CustomInput v-model="customInput" class="w-40"/>
+        <div>
+          {{ customInput }}
+        </div>
+    </div>
     <!-- <button class="px-3 py-1 border-2 border-cyan-400" @click="refresh">Refresh</button> -->
     <!-- {{ posts.response }} -->
   </div>
@@ -168,6 +213,24 @@
     TooltipTrigger
   } from '@/components/ui/tooltip'
   // End Initialize ShadCN Tooltip
+
+  // Initialize ShadCN Dialog/Modal
+  import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+// End Initialize ShadCN Dialog/Modal
+
+// Initialize ShadCN Input & Label
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+// End Initialize ShadCN Input & Label
+  const customInput = ref('')
 
   const currentPage = ref(1)
   const limit = ref(10)

@@ -12,8 +12,9 @@
 3. Data fetching(datatable with filter and pagination)(DONE)
 4. Form CRUDs(with image/file uploads)
 5. Authentication
-6. Validation(Vuelidate used)
+6. Validation(DONE. Vuelidate used)
 7. Image Optimization
-8. CSS/JS Component Libraries(Vuetify/ShadCN/PrimeVue Tailwind)
+8. CSS/JS Component Libraries(Vuetify/ShadCN/PrimeVue Tailwind)(ShadCN is great. PrimeVue sucks.)
 9. Framer Motion/Animate.css
 10. See vee-validate/zod resolver(was used in shadCN-vue docs)
+11. Reuseable components with validation using shadCN
