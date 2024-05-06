@@ -199,6 +199,31 @@
           :errorMessage="v$.$errors[1]?.$message"
         />
 
+
+
+
+        <CustomDatepicker v-model="customDateTimeVal" />
+        <Popover>
+          <PopoverTrigger as-child>
+            <Button
+              variant="outline"
+              :class="cn(
+                'w-[280px] justify-start text-left font-normal',
+                !value && 'text-muted-foreground',
+              )"
+            >
+              <CalendarIcon class="mr-2 h-4 w-4" />
+              {{ value ? df.format(value.toDate(getLocalTimeZone())) : "Pick a date" }}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent class="w-auto p-0">
+            <Calendar v-model="value" initial-focus />
+          </PopoverContent>
+        </Popover>
+
+
+
+
         <Button @click="submit">
             Save changes
         </Button>
@@ -218,7 +243,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import { useDebounceFn } from '@vueuse/core'
 
   definePageMeta({
@@ -266,8 +291,34 @@
   import { useVuelidate } from '@vuelidate/core';
   const customInput = ref('')
   const customInput2 = ref('')
-    // computed rules for generals
-    const customInputRules = computed(() => {
+
+
+
+
+  import {
+    DateFormatter,
+    type DateValue,
+    getLocalTimeZone,
+  } from '@internationalized/date'
+
+  import { Calendar as CalendarIcon } from 'lucide-vue-next'
+  import { Calendar } from '@/components/ui/calendar'
+  import { Button } from '@/components/ui/button'
+  import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+  import { cn } from '@/lib/utils'
+
+  const df = new DateFormatter('en-US', {
+    dateStyle: 'long',
+  })
+
+  const customDateTimeVal = ref('')
+  const value = ref<DateValue>()
+
+
+
+
+  // computed rules for validation
+  const customInputRules = computed(() => {
       return {
           customInput: {
               required: helpers.withMessage('The customInput1 field is require', required,),
