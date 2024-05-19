@@ -17,7 +17,6 @@
         <Calendar v-model="proxyValue" initial-focus />
       </PopoverContent>
     </Popover>
-    {{  }}
     <div v-if="errorMessage" class="text-red-500 mt-1 ml-2">
       {{ errorMessage }}
     </div>
@@ -48,10 +47,12 @@
     class?: HTMLAttributes['class']
   }>()
 
-  const emits = defineEmits<{
-    (e: 'update:modelValue', payload: string | number): void
-  }>()
+  // const emits = defineEmits<{
+  //   (e: 'update:modelValue', payload: string | number): void
+  // }>()
 
-  const proxyValue = defineModel()
+  const emits = defineEmits(['update:modelValue'])
+
+  const proxyValue = defineModel() // has a default if empty. Right now, it is actually defineModel('modelValue')
   // End Date Component
 </script>

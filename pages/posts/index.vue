@@ -178,17 +178,14 @@
       </Dialog>
 
       <h1>Experimenting with custom input</h1>
-        <CustomInput v-model="customInput" 
+        <CustomInput v-model="customInput"
           class="w-40"
           :class="{
             'dark:border-red-500 dark:focus:border-red-500': v$.customInput.$error,
             'dark:border-slate-500 dark:focus:border-indigo-400': !v$.customInput.$error,
           }"
-          :errorMessage="v$.$errors[0]?.$message"
+          :errorMessage="filterError(v$.$errors, 'customInput')"
         />
-        <div>
-          {{ customInput }}
-        </div>
 
         <CustomInput v-model="customInput2" 
           class="w-40"
@@ -196,13 +193,10 @@
             'dark:border-red-500 dark:focus:border-red-500': v$.customInput2.$error,
             'dark:border-slate-500 dark:focus:border-indigo-400': !v$.customInput2.$error,
           }"
-          :errorMessage="v$.$errors[1]?.$message"
+          :errorMessage="filterError(v$.$errors, 'customInput2')"
         />
 
-
-
-
-        <CustomDatepicker v-model="customDateTimeVal" />
+        <CustomDatepicker v-model="customDateTimeVal" :errorMessage="filterError(v$.$errors, 'customDateTimeVal')" />
         <Popover>
           <PopoverTrigger as-child>
             <Button
@@ -220,9 +214,6 @@
             <Calendar v-model="value" initial-focus />
           </PopoverContent>
         </Popover>
-
-
-
 
         <Button @click="submit">
             Save changes
@@ -291,6 +282,7 @@
   import { useVuelidate } from '@vuelidate/core';
   const customInput = ref('')
   const customInput2 = ref('')
+  const customDateTimeVal = ref('')
 
 
 
@@ -311,9 +303,6 @@
     dateStyle: 'long',
   })
 
-  const customDateTimeVal = ref('')
-  const value = ref<DateValue>()
-
 
 
 
@@ -321,12 +310,16 @@
   const customInputRules = computed(() => {
       return {
           customInput: {
-              required: helpers.withMessage('The customInput1 field is require', required,),
+              required: helpers.withMessage('The customInput1 field is require', required),
               $autoDirty: true,
           },
           customInput2: {
-              email: helpers.withMessage('The customInput2 field must contain a valid email', email,),
+              email: helpers.withMessage('The customInput2 field must contain a valid email', email),
               required: helpers.withMessage('The customInput2 field is require', required,),
+              $autoDirty: true,
+          },
+          customDateTimeVal: {
+              required: helpers.withMessage('The customDateTimeVal field is require', required),
               $autoDirty: true,
           },
           // email: {
@@ -337,7 +330,10 @@
       };
   });
 
-  const v$ = useVuelidate(customInputRules, { customInput })
+
+
+
+  const v$ = useVuelidate(customInputRules, { customInput, customInput2, customDateTimeVal })
 
   const submit = () => {
       v$.value.$validate();
@@ -349,6 +345,18 @@
         console.log('submit');
       }
   };
+
+  const filterError = (errors, inputName) => {
+    let msg = ""
+    const errorMsg = errors.map((error) => {
+      if(error.$property === inputName){
+        msg = error.$message
+      }
+    })
+
+    return msg
+  }
+
   // End For trying out custom component written over shadCN
 
   const currentPage = ref(1)
