@@ -197,25 +197,8 @@
         />
 
         <CustomDatepicker v-model="customDateTimeVal" :errorMessage="filterError(v$.$errors, 'customDateTimeVal')" />
-        <Popover>
-          <PopoverTrigger as-child>
-            <Button
-              variant="outline"
-              :class="cn(
-                'w-[280px] justify-start text-left font-normal',
-                !value && 'text-muted-foreground',
-              )"
-            >
-              <CalendarIcon class="mr-2 h-4 w-4" />
-              {{ value ? df.format(value.toDate(getLocalTimeZone())) : "Pick a date" }}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent class="w-auto p-0">
-            <Calendar v-model="value" initial-focus />
-          </PopoverContent>
-        </Popover>
 
-        <Button @click="submit">
+        <Button @click="vuelidateSubmit">
             Save changes
         </Button>
 
@@ -228,6 +211,15 @@
           <small> says:</small>
           <strong>{{ error.$message }}</strong>
         </p>
+
+      <br /><br /><br />
+
+      <!-- With VeeValidate -->
+      
+
+
+
+
     </div>
     <!-- <button class="px-3 py-1 border-2 border-cyan-400" @click="refresh">Refresh</button> -->
     <!-- {{ posts.response }} -->
@@ -277,34 +269,12 @@
   import { Label } from '@/components/ui/label'
   // End Initialize ShadCN Input & Label
 
-  // For trying out custom component written over shadCN
+  // For trying out custom component written over shadCN along with Vuelidate
   import { required, helpers, email } from '@vuelidate/validators';
   import { useVuelidate } from '@vuelidate/core';
   const customInput = ref('')
   const customInput2 = ref('')
   const customDateTimeVal = ref('')
-
-
-
-
-  import {
-    DateFormatter,
-    type DateValue,
-    getLocalTimeZone,
-  } from '@internationalized/date'
-
-  import { Calendar as CalendarIcon } from 'lucide-vue-next'
-  import { Calendar } from '@/components/ui/calendar'
-  import { Button } from '@/components/ui/button'
-  import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-  import { cn } from '@/lib/utils'
-
-  const df = new DateFormatter('en-US', {
-    dateStyle: 'long',
-  })
-
-
-
 
   // computed rules for validation
   const customInputRules = computed(() => {
@@ -330,22 +300,20 @@
       };
   });
 
-
-
-
   const v$ = useVuelidate(customInputRules, { customInput, customInput2, customDateTimeVal })
 
-  const submit = () => {
+  const vuelidateSubmit = () => {
       v$.value.$validate();
       console.log(v$.value.customInput,'values');
       console.log(v$.value.$errors,'errors');
       console.log(v$.value.$error,'error');
 
       if(!v$.value.$error){
-        console.log('submit');
+        console.log('vuelidateSubmit');
       }
   };
 
+  // NEEDED FOR SENDING THE CORRECT VUELIDATE ERROR MESSAGE AS PROP TO COMPONENTS
   const filterError = (errors, inputName) => {
     let msg = ""
     const errorMsg = errors.map((error) => {
@@ -356,8 +324,11 @@
 
     return msg
   }
+  // End For trying out custom component written over shadCN Vuelidate
 
-  // End For trying out custom component written over shadCN
+  // Attempting to use VeeValidate with custom components
+
+  // End Attempting to use VeeValidate with custom components
 
   const currentPage = ref(1)
   const limit = ref(10)
