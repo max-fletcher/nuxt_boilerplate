@@ -237,7 +237,10 @@
           :errorMessage="errors.password"
         />
 
+        {{ password }}
+
         <CustomDatepicker v-model="datetime" :errorMessage="errors.datetime" />
+        {{ datetime }}
 
         <Button class="mt-3">
           Submit
@@ -362,8 +365,25 @@
     zod.object({
       email2: zod.string({ required_error: "email2 is required" }).min(1, { message: "email2 is required" }).email({ message: 'Must be a valid email' }),
       password: zod.string({ required_error: "password is required" }).min(1, { message: 'password is required' }).min(8, { message: 'Too short' }),
-      // datetime: zod.string({ required_error: "datetime is required" }).min(1, { message: 'datetime is required' }).min(8, { message: 'Too short' }),
-      datetime: zod.any(),
+      // datetime: zod.coerce.object({
+      //   day: zod.number({
+      //       required_error: "datetime is required",
+      //       invalid_type_error: "datetime must be a number",
+      //   }),
+      //   // month: zod.number({ required_error: "datetime is required" }),
+      //   // year: zod.number({ required_error: "datetime is required" }),
+      // }),
+      // datetime:zod.any().refine((val)=>{
+      //   console.log(val);
+      //   // console.log(val,'dfj',val.day, val.month, val.year);
+      //   if(val.day){
+      //     const dt = val.year + "=" + val.month + "-" + val.day
+      //     if(dt.match("^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$"))
+      //   }
+      //   else{
+      //     return false
+      //   }
+      // },'invalid datetime')
     })
   );
   const { handleSubmit, errors } = useForm({
@@ -377,7 +397,8 @@
   // const $axios = axios().provide.axios //GETTING THE AXIOS INSTANCE PROVIDED BY PROVIDER. SEE THAT FILE.
 
   const onSubmit = handleSubmit(values => {
-    console.log(values, values.datetime.day, values.datetime.month, values.datetime.year);
+    console.log(values, values.datetime?.day, values.datetime?.month, values.datetime?.year)
+    console.log(typeof(values.datetime?.day))
     alert(values);
 
     // SEND REQUEST TO BACKEND
