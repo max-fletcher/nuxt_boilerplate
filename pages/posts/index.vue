@@ -177,52 +177,81 @@
         </DialogContent>
       </Dialog>
 
-      <h1>Experimenting with custom input</h1>
-        <CustomInput v-model="customInput"
-          class="w-40"
-          :class="{
-            'dark:border-red-500 dark:focus:border-red-500': v$.customInput.$error,
-            'dark:border-slate-500 dark:focus:border-indigo-400': !v$.customInput.$error,
-          }"
-          :errorMessage="filterError(v$.$errors, 'customInput')"
-        />
+      <h1 class="text-2xl my-10 border-b-2 border-b-2 border-cyan-400">Experimenting with custom components</h1>
 
-        <CustomInput v-model="customInput2" 
-          class="w-40"
-          :class="{
-            'dark:border-red-500 dark:focus:border-red-500': v$.customInput2.$error,
-            'dark:border-slate-500 dark:focus:border-indigo-400': !v$.customInput2.$error,
-          }"
-          :errorMessage="filterError(v$.$errors, 'customInput2')"
-        />
+      <h1 class="text-xl p-2 border-b-2 border-b-2 border-cyan-400">With Vuelidate</h1>
+      <CustomInput v-model="customInput"
+        class="w-40"
+        :class="{
+          'dark:border-red-500 dark:focus:border-red-500': v$.customInput.$error,
+          'dark:border-slate-500 dark:focus:border-indigo-400': !v$.customInput.$error,
+        }"
+        :errorMessage="filterError(v$.$errors, 'customInput')"
+      />
 
-        <CustomDatepicker v-model="customDateTimeVal" :errorMessage="filterError(v$.$errors, 'customDateTimeVal')" />
+      <CustomInput v-model="customInput2" 
+        class="w-40"
+        :class="{
+          'dark:border-red-500 dark:focus:border-red-500': v$.customInput2.$error,
+          'dark:border-slate-500 dark:focus:border-indigo-400': !v$.customInput2.$error,
+        }"
+        :errorMessage="filterError(v$.$errors, 'customInput2')"
+      />
 
-        <Button @click="vuelidateSubmit">
-            Save changes
-        </Button>
+      <CustomDatepicker v-model="customDateTimeVal" :errorMessage="filterError(v$.$errors, 'customDateTimeVal')" />
 
-        <p>{{ v$.$errors[0]?.$message }}</p>
-        <p>{{ v$.$errors[1]?.$message }}</p>
-        <p v-for="error of v$.$errors" :key="error.$uid">
-          <strong>{{ error.$validator }}</strong>
-          <small> on property</small>
-          <strong>{{ error.$property }}</strong>
-          <small> says:</small>
-          <strong>{{ error.$message }}</strong>
-        </p>
+      <Button @click="vuelidateSubmit">
+          Save changes
+      </Button>
+
+      <p>{{ v$.$errors[0]?.$message }}</p>
+      <p>{{ v$.$errors[1]?.$message }}</p>
+      <p v-for="error of v$.$errors" :key="error.$uid">
+        <strong>{{ error.$validator }}</strong>
+        <small> on property</small>
+        <strong>{{ error.$property }}</strong>
+        <small> says:</small>
+        <strong>{{ error.$message }}</strong>
+      </p>
 
       <br /><br /><br />
 
       <!-- With VeeValidate -->
-      
+      <h1 class="text-xl p-2 border-b-2 border-b-2 border-cyan-400">With VeeValidate</h1>
+      <form @submit="onSubmit">
+        <CustomInput v-model="email2"
+          class="w-40"
+          :class="{
+            'dark:border-red-500 dark:focus:border-red-500': errors.email2,
+            'dark:border-slate-500 dark:focus:border-indigo-400': !errors.email2,
+          }"
+          :errorMessage="errors.email2"
+        />
 
+        <CustomInput v-model="password"
+          class="w-40"
+          :class="{
+            'dark:border-red-500 dark:focus:border-red-500': errors.password,
+            'dark:border-slate-500 dark:focus:border-indigo-400': !errors.password,
+          }"
+          :errorMessage="errors.password"
+        />
 
+        <CustomDatepicker v-model="datetime" :errorMessage="errors.datetime" />
 
+        <Button class="mt-3">
+          Submit
+        </Button>
+      </form>
+      <!-- End With VeeValidate -->
 
+      <div>
+        All Errors: {{ errors }}
+        <div v-for="(error, key) in errors" :key="key">
+          {{ error }}
+        </div>
+      </div>
     </div>
-    <!-- <button class="px-3 py-1 border-2 border-cyan-400" @click="refresh">Refresh</button> -->
-    <!-- {{ posts.response }} -->
   </div>
 </template>
 
@@ -326,9 +355,36 @@
   }
   // End For trying out custom component written over shadCN Vuelidate
 
-  // Attempting to use VeeValidate with custom components
 
-  // End Attempting to use VeeValidate with custom components
+  // Attempting to use VeeValidate with custom components written over shadCN
+  import * as zod from 'zod';
+  const validationSchema = toTypedSchema(
+    zod.object({
+      email2: zod.string({ required_error: "email2 is required" }).min(1, { message: "email2 is required" }).email({ message: 'Must be a valid email' }),
+      password: zod.string({ required_error: "password is required" }).min(1, { message: 'password is required' }).min(8, { message: 'Too short' }),
+      // datetime: zod.string({ required_error: "datetime is required" }).min(1, { message: 'datetime is required' }).min(8, { message: 'Too short' }),
+      datetime: zod.any(),
+    })
+  );
+  const { handleSubmit, errors } = useForm({
+    validationSchema,
+  });
+  const { value: email2 } = useField('email2');
+  const { value: password } = useField('password');
+  const { value: datetime } = useField('datetime');
+
+  // import axios from '../../plugins/axios';
+  // const $axios = axios().provide.axios //GETTING THE AXIOS INSTANCE PROVIDED BY PROVIDER. SEE THAT FILE.
+
+  const onSubmit = handleSubmit(values => {
+    console.log(values, values.datetime.day, values.datetime.month, values.datetime.year);
+    alert(values);
+
+    // SEND REQUEST TO BACKEND
+    // await $axios.post(`${runtimeConfig.public.API_URL}posts`, {})
+  });
+  // End Attempting to use VeeValidate with custom components written over shadCN
+
 
   const currentPage = ref(1)
   const limit = ref(10)

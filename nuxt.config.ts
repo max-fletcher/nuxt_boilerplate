@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxtjs/color-mode',
     '@vueuse/nuxt',
-    "shadcn-nuxt"
+    "shadcn-nuxt",
+    '@vee-validate/nuxt',
   ],
   shadcn: {
     prefix: '',
