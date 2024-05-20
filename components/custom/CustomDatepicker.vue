@@ -42,17 +42,23 @@
 
   const props = defineProps<{
     defaultValue?: string | number
-    modelValue?: string | number
+    // modelValue?: string | number // replaced with defineModel
     errorMessage?: string
     class?: HTMLAttributes['class']
   }>()
 
-  // const emits = defineEmits<{
-  //   (e: 'update:modelValue', payload: string | number): void
-  // }>()
-
-  const emits = defineEmits(['update:modelValue'])
+  // const emits = defineEmits(['update:modelValue']) // replaced with defineModel
 
   const proxyValue = defineModel() // has a default if empty. Right now, it is actually defineModel('modelValue')
   // End Date Component
+
+  // For processing defaultValue if provided
+  import { CalendarDate } from '@internationalized/date'
+  if(props.defaultValue){
+    const [year, month, day] = props.defaultValue.split("-").map(item => parseInt(item))
+    proxyValue.value = new CalendarDate(year, month, day) // If you want to set a default value
+    // proxyValue.value =  // If you want to set a default value
+  }
+
+  console.log(proxyValue);
 </script>

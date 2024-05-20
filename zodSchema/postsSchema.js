@@ -19,7 +19,7 @@ const StorePostSchema = zod.object({
           return !!dateString.match(regEx)
         }
       },
-      { message: "Incorrect date format. Please enter date as YY-mm-dd."}
+      { message: "Incorrect date format. Please enter date as yyyy-mm-dd."}
     )
 })
 

@@ -239,7 +239,8 @@
 
         {{ password }}
 
-        <CustomDatepicker v-model="datetime" :errorMessage="errors.datetime" />
+        <!-- Add defaultValue="2024-3-4" as prop if you want to set a default date -->
+        <CustomDatepicker v-model="datetime" :errorMessage="errors.datetime" defaultValue="2024-3-4" />
         {{ datetime }}
 
         <Button class="mt-3">
@@ -358,7 +359,6 @@
   }
   // End For trying out custom component written over shadCN Vuelidate
 
-
   // Attempting to use VeeValidate with custom components written over shadCN
   import { StorePostSchema } from '@/zodSchema/postsSchema'; // Importing Zod schema from separate file
   const validationSchema = toTypedSchema(StorePostSchema);
@@ -368,6 +368,9 @@
   const { value: email2 } = useField('email2');
   const { value: password } = useField('password');
   const { value: datetime } = useField('datetime');
+
+  // import { CalendarDate } from '@internationalized/date'
+  // datetime.value = new CalendarDate(2024, 3, 4) // If you want to set a default value
 
   // import axios from '../../plugins/axios';
   // const $axios = axios().provide.axios //GETTING THE AXIOS INSTANCE PROVIDED BY PROVIDER. SEE THAT FILE.
