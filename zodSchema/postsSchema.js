@@ -20,7 +20,8 @@ const StorePostSchema = zod.object({
         }
       },
       { message: "Incorrect date format. Please enter date as yyyy-mm-dd."}
-    )
+    ),
+    checkboxVal: zod.boolean({ required_error: "CheckboxVal is required" }),
 })
 
 export { StorePostSchema }

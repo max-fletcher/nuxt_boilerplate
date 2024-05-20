@@ -59,6 +59,4 @@
     proxyValue.value = new CalendarDate(year, month, day) // If you want to set a default value
     // proxyValue.value =  // If you want to set a default value
   }
-
-  console.log(proxyValue);
 </script>

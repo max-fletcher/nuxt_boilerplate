@@ -14,18 +14,17 @@ import { cn } from '@/lib/utils'
 
 const props = defineProps<{
   defaultValue?: string | number
-  modelValue?: string | number
+  // modelValue?: string | number
   errorMessage?: string
   class?: HTMLAttributes['class']
 }>()
 
-const emits = defineEmits<{
-  (e: 'update:modelValue', payload: string | number): void
-}>()
+// const emits = defineEmits(['update:modelValue']) // replaced with defineModel
 
-// const modelValue = useVModel(props, 'modelValue', emits, {
+// const modelValue = useVModel(props, 'modelValue', emits, { // replaced with defineModel
 //   passive: true,
 //   defaultValue: props.defaultValue,
 // })
+
 const proxyValue = defineModel()
 </script>

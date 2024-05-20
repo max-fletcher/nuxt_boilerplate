@@ -97,11 +97,33 @@
     </div>
 
     <div>
-      <h1>
+      <h1 class="text-5xl">
         ShadCN Components
       </h1>
 
-      <h1>Buttons</h1>
+      <h1 class="mt-4">Accordion</h1>
+      <Accordion type="multiple" collapsible>
+        <AccordionItem value="item-1">
+          <AccordionTrigger>1st Accordion Trigger</AccordionTrigger>
+          <AccordionContent>
+            1st Accordion Content
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-2">
+          <AccordionTrigger>2nd Accordion Trigger</AccordionTrigger>
+          <AccordionContent>
+            2nd Accordion Content
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-3">
+          <AccordionTrigger>3rd Accordion Trigger</AccordionTrigger>
+          <AccordionContent>
+            3rd Accordion Content
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+
+      <h1 class="mt-5 mb-2">Buttons</h1>
       <Button variant="destructive">Click me</Button>
 
       <Button disabled>
@@ -109,7 +131,7 @@
         Toast
       </Button>
 
-      <h1>Toast</h1>
+      <h1 class="mt-5 mb-2">Toast</h1>
       <Toaster />
       <!-- Button with custom variant(see button/index.ts to see all variants and make one if need be) -->
       <Button
@@ -122,12 +144,12 @@
             });
           }"
       >
-        Add to calendar
+        Trigger Toast
       </Button>
 
       <br />
 
-      <h1>Tooltip</h1>
+      <h1 class="mt-5 mb-2">Tooltip</h1>
       <!-- Control how fast the tooltip will appear -->
       <TooltipProvider :delay-duration="100" :skip-delay-duration="100">
         <Tooltip>
@@ -141,7 +163,7 @@
         </Tooltip>
       </TooltipProvider>
 
-      <h1>Dialog/Modal</h1>
+      <h1 class="mt-5 mb-2">Dialog/Modal</h1>
       <Dialog>
         <DialogTrigger as-child>
           <Button variant="outline">
@@ -177,7 +199,7 @@
         </DialogContent>
       </Dialog>
 
-      <h1 class="text-2xl my-10 border-b-2 border-b-2 border-cyan-400">Experimenting with custom components</h1>
+      <h1 class="text-2xl mt-7 mb-5 border-b-2 border-t-2 py-2 border-cyan-400">Experimenting with custom components</h1>
 
       <h1 class="text-xl p-2 border-b-2 border-b-2 border-cyan-400">With Vuelidate</h1>
       <CustomInput v-model="customInput"
@@ -200,7 +222,7 @@
 
       <CustomDatepicker v-model="customDateTimeVal" :errorMessage="filterError(v$.$errors, 'customDateTimeVal')" />
 
-      <Button @click="vuelidateSubmit">
+      <Button @click="vuelidateSubmit" class="mt-5">
           Save changes
       </Button>
 
@@ -214,10 +236,8 @@
         <strong>{{ error.$message }}</strong>
       </p>
 
-      <br /><br /><br />
-
       <!-- With VeeValidate -->
-      <h1 class="text-xl p-2 border-b-2 border-b-2 border-cyan-400">With VeeValidate</h1>
+      <h1 class="text-xl p-2 border-b-2 border-b-2 border-cyan-400 mt-10">With VeeValidate</h1>
       <form @submit="onSubmit">
         <CustomInput v-model="email2"
           class="w-40"
@@ -236,12 +256,14 @@
           }"
           :errorMessage="errors.password"
         />
-
         {{ password }}
 
         <!-- Add defaultValue="2024-3-4" as prop if you want to set a default date -->
         <CustomDatepicker v-model="datetime" :errorMessage="errors.datetime" defaultValue="2024-3-4" />
         {{ datetime }}
+
+        <CustomCheckbox v-model="checkboxVal" :handleChange="handleCheckboxValChange" :errorMessage="errors.checkboxVal" />
+        {{ checkboxVal }}
 
         <Button class="mt-3">
           Submit
@@ -362,15 +384,17 @@
   // Attempting to use VeeValidate with custom components written over shadCN
   import { StorePostSchema } from '@/zodSchema/postsSchema'; // Importing Zod schema from separate file
   const validationSchema = toTypedSchema(StorePostSchema);
-  const { handleSubmit, errors } = useForm({
-    validationSchema,
-  });
+  const { handleSubmit, errors } = useForm({ validationSchema });
   const { value: email2 } = useField('email2');
   const { value: password } = useField('password');
   const { value: datetime } = useField('datetime');
+  const { value: checkboxVal } = useField('checkboxVal');
+  checkboxVal.value = true // For setting default value
 
-  // import { CalendarDate } from '@internationalized/date'
-  // datetime.value = new CalendarDate(2024, 3, 4) // If you want to set a default value
+  // 
+  const handleCheckboxValChange = () => {
+    checkboxVal.value = !checkboxVal.value
+  }
 
   // import axios from '../../plugins/axios';
   // const $axios = axios().provide.axios //GETTING THE AXIOS INSTANCE PROVIDED BY PROVIDER. SEE THAT FILE.
@@ -384,6 +408,9 @@
     // await $axios.post(`${runtimeConfig.public.API_URL}posts`, {})
   });
   // End Attempting to use VeeValidate with custom components written over shadCN
+
+  // shadCN accordion
+  import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 
   const currentPage = ref(1)
